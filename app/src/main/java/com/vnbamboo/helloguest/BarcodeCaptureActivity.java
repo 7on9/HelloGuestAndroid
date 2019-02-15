@@ -203,7 +203,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         // at long distances.
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedPreviewSize(1920, 1080)
                 .setRequestedFps(15.0f);
 
         // make sure that auto focus is an available option
@@ -361,8 +361,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         //barcode scan success full
         if (best != null) {
             Intent data = new Intent();
-            //setResult(CommonStatusCodes.SUCCESS, data);
-            //finish();
+//            setResult(CommonStatusCodes.SUCCESS, data);
+//            finish();
             return true;
         }
         return false;
@@ -432,6 +432,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     @Override
     public void onBarcodeDetected(Barcode barcode) {
         Intent data = new Intent();
+        Log.e("Succes", barcode.displayValue);
         //do something with barcode data returned
 
     }

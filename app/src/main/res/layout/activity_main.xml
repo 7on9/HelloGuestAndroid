@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Xin chào \n Đồng chí!"
@@ -27,7 +27,8 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@mipmap/qr_code"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,7 +42,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/barcode_value" />
-
 
     <Button
         android:layout_width="match_parent"

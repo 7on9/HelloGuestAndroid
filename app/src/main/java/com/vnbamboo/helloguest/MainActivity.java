@@ -39,8 +39,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         statusMessage = (TextView)findViewById(R.id.status_message);
         barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
-        useFlash = (CompoundButton) findViewById(R.id.use_flash);
-
         findViewById(R.id.btnReadBarcode).setOnClickListener(this);
     }
 
@@ -55,8 +53,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // launch barcode activity.
             Intent intent = new Intent(this, BarcodeCaptureActivity.class);
             intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
-            intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash.isChecked());
-            startActivityForResult(intent, RC_BARCODE_CAPTURE);
+            intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+            this.startActivity(intent);
+//            startActivityForResult(intent, RC_BARCODE_CAPTURE);
         }
 
     }
@@ -83,25 +82,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * @see #createPendingResult
      * @see #setResult(int)
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RC_BARCODE_CAPTURE) {
-            if (resultCode == CommonStatusCodes.SUCCESS) {
-                if (data != null) {
-                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    barcodeValue.setText(barcode.displayValue);
-                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-                } else {
-                    statusMessage.setText(R.string.barcode_failure);
-                    Log.d(TAG, "No barcode captured, intent data is null");
-                }
-            } else {
-                statusMessage.setText(String.format(getString(R.string.barcode_error),
-                        CommonStatusCodes.getStatusCodeString(resultCode)));
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == RC_BARCODE_CAPTURE) {
+//            if (resultCode == CommonStatusCodes.SUCCESS) {
+//                if (data != null) {
+//                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+//                    barcodeValue.setText(barcode.displayValue);
+//                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
+//                } else {
+//                    statusMessage.setText(R.string.barcode_failure);
+//                    Log.d(TAG, "No barcode captured, intent data is null");
+//                }
+//            } else {
+//                statusMessage.setText(String.format(getString(R.string.barcode_error),
+//                        CommonStatusCodes.getStatusCodeString(resultCode)));
+//            }
+//        }
+//        else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 }
