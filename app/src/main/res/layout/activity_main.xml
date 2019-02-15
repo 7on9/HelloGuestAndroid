@@ -2,69 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
+    android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Xin chào \n Đồng chí!"
-        android:fontFamily="@font/mitr_bold"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        android:id="@+id/status_message"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/barcode_value" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
-        <CheckBox
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/auto_focus"
-            android:id="@+id/auto_focus"
-            android:checked="false"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+        android:layout_weight="2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
 
-        <CheckBox
-            android:layout_weight="1"
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@mipmap/qrcode"
+            android:tint="@android:color/white"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/use_flash"
-            android:id="@+id/use_flash"
-            android:textColor="@color/white"
-            android:checked="false" />
+            android:layout_marginTop="70dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Đặt mã trước camera và bấm nút phía dưới để bắt đầu quét"
+            android:textColor="@android:color/white"
+            android:textSize="25dp" />
+
     </LinearLayout>
+
     <Button
+        android:id="@+id/btn_scan"
+        android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/button_scan"
-        android:id="@+id/btnReadBarcode"
-        android:textColor="@color/white"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="center"
         android:background="@drawable/shape_button"
-        android:textSize="30dp"
-        android:layout_gravity="center"/>
-
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Quét mã QR"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>
