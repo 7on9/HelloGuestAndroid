@@ -1,7 +1,11 @@
 package com.vnbamboo.helloguest;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.Button;
 
 public class ViewInfoGuestActivity extends AppCompatActivity {
     Button btnConfirm, btnCancel;
+    ProgressDialog progressDoalog;
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
@@ -32,5 +37,27 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    private void sendRequestInfo() {
+        progressDoalog = ProgressDialog.show(ViewInfoGuestActivity.this, "",
+                "Đang tải dữ liệu khách mời. Xin đợi 1 chút...", true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        Handler handle = new Handler() {
+            @Override
+            public void handleMessage( Message msg ) {
+                super.handleMessage(msg);
+                progressDoalog.incrementProgressBy(1);
+            }
+        };
     }
 }

@@ -440,7 +440,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         Log.e("Succes", barcode.displayValue);
 //        Dialog
         //do something with barcode data returned
-
     }
 
     private void transparentToolbar() {
