@@ -19,6 +19,9 @@
         <activity android:name=".BarcodeCaptureActivity">
 
         </activity>
+        <activity android:name=".ViewInfoGuestActivity">
+
+        </activity>
     </application>
 
 </manifest>

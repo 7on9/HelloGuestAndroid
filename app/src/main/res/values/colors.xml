@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="blue_1">#4facfe</color>
     <color name="blue_2">#00f2fe</color>
+    <color name="light_green">#68A225</color>
     <color name="white">#FFFFFF</color>
+    <color name="viewBg" tools:ignore="MissingDefaultResource">#f8f8f8</color>
+    <color name="btn_disabled">#999</color>
+    <color name="lbl_value">#222222</color>
 </resources>
