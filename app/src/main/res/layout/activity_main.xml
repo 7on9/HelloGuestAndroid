@@ -7,62 +7,78 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="@dimen/dimen_30"
+        android:gravity="center"
+        android:background="@drawable/shape_edit_text"
+        android:hint="Nhập mã khách mời"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:text="Tìm khách mời"
+        android:id="@+id/btnCheck"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_button"
+        android:textSize="25dp"
+        android:textAllCaps="false"
+        android:layout_marginLeft="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/dimen_30"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Xin chào \n Đồng chí!"
-        android:fontFamily="@font/mitr_bold"
+        android:layout_weight="8"
+        android:text="Hoặc bạn có thể"
+        android:textSize="23dp"
         android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        android:id="@+id/status_message"/>
+        android:gravity="center"/>
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@mipmap/qr_code"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:layout_gravity="center" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:text="Hãy đặt mã QR của bạn trước camera và bấm nút phía dưới"
-        android:textSize="25dp"
+        android:layout_marginRight="@dimen/dimen_30"
+        android:layout_marginLeft="@dimen/dimen_30"
+        android:layout_marginBottom="@dimen/dimen_10"
+        android:layout_weight="8"
+        android:text="Đặt mã QR trước camera và\nbấm nút phía dưới"
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:gravity="center"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/barcode_value" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="6"
+        android:layout_weight="8"
         android:text="@string/button_scan"
         android:id="@+id/btnReadBarcode"
         android:textColor="@color/white"
         android:background="@drawable/shape_button"
         android:textSize="25dp"
         android:textAllCaps="false"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/dimen_30"
         android:layout_gravity="center"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="16dp"
         android:gravity="center"
-        android:text="®Bamboo"
+        android:text="Bamboo®"
         android:textColor="@color/white"/>
 </LinearLayout>

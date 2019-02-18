@@ -23,23 +23,23 @@
             android:layout_gravity="center"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgAvatar"
-            app:civ_border_overlay="true"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            app:civ_border_width="5dp"
             app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:scaleType="fitCenter"
-            android:layout_weight="1"
             android:elevation="4dp"
+            android:layout_weight="1"
             android:layout_gravity="center"
-            android:src="@mipmap/avatar" />
+            android:src="@mipmap/xxx"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:id="@+id/layout_info"
-        android:background="@color/white"
+        android:background="#f5f5f5"
+        android:clipToPadding="false"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,327 +50,166 @@
                 android:layout_height="wrap_content"
                 android:elevation="4dp"
                 android:layout_marginTop="@dimen/dimen_10">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Họ và tên"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="1sp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Tên đại biểu"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:layout_marginTop="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Họ và tên"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="1sp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Tên đại biểu"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:layout_marginTop="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Họ và tên"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="1sp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Tên đại biểu"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:layout_marginTop="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Họ và tên"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="1sp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Tên đại biểu"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:layout_marginTop="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Họ và tên"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="1sp"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen_10"
-                        android:fontFamily="@font/noticiatext_regular"
-                        android:textSize="20dp"
-                        android:background="#f1f0f0"
-                        android:text="Tên đại biểu"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:layout_marginTop="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
+                    android:background="@color/white"
                     android:text="Họ và tên"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@android:color/black" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
+                    android:background="@color/white"
                     android:text="Tên đại biểu"/>
             </LinearLayout>
-        </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:layout_marginTop="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/dimen_10"
-                    android:fontFamily="@font/noticiatext_regular"
-                    android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Họ và tên"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@android:color/black" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:elevation="4dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Tên đại biểu"/>
-            </LinearLayout>
-        </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:layout_marginTop="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2">
+                    android:background="@color/white"
+                    android:text="Năm sinh"/>
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Họ và tên"/>
+                    android:background="@color/white"
+                    android:text="20 - 07 - 1998"/>
             </LinearLayout>
-            <TextView
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@android:color/black" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:elevation="4dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Tên đại biểu"/>
-            </LinearLayout>
-        </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:layout_marginTop="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2">
+                    android:background="@color/white"
+                    android:text="Địa chỉ"/>
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Họ và tên"/>
+                    android:background="@color/white"
+                    android:text="354/12 Đường số 3, tỉnh lộ 43 Khu phố 5, Phường Tam Bình, Quận Thủ Đức, Thành Phố Hồ Chí Minh"/>
             </LinearLayout>
-            <TextView
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@android:color/black" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:elevation="4dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:padding="@dimen/dimen_10"
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
-                    android:background="#f1f0f0"
-                    android:text="Tên đại biểu"/>
+                    android:background="@color/white"
+                    android:text="Quê quán"/>
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Thành Phố Hồ Chí Minh"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Đơn vị"/>
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Chi Đoàn Công An"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Số ghế ngồi"/>
+                <TextView
+                android:layout_width="1sp"
+                android:layout_height="match_parent"
+                android:background="#f1f0f0"
+                />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="69"/>
             </LinearLayout>
         </LinearLayout>
-        </LinearLayout>
-
     </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"

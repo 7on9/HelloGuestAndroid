@@ -36,9 +36,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 getWindow().setStatusBarColor(getColor(R.color.blue_2));
             }
         }
-        statusMessage = (TextView)findViewById(R.id.status_message);
-        barcodeValue = (TextView)findViewById(R.id.barcode_value);
-
         findViewById(R.id.btnReadBarcode).setOnClickListener(this);
     }
 
