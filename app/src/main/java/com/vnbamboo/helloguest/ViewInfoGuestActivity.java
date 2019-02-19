@@ -1,8 +1,9 @@
 package com.vnbamboo.helloguest;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,21 +12,19 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.concurrent.TimeoutException;
-
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.conn.ConnectTimeoutException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.vnbamboo.helloguest.Utility.DEFAULT_URL;
@@ -39,6 +38,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
     String usercode;
     JSONObject jsonReturn;
     long beginTime, progress;
+    Context thisContext = this.getBaseContext();
 
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
@@ -72,6 +72,24 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             @Override
             public void onClick( View v ) {
                 onBackPressed();
+            }
+        });
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                final Dialog settingsDialog = new Dialog(v.getContext());
+                settingsDialog.setContentView(getLayoutInflater().inflate(R.layout.image_dialog, null));
+                Button btnOK = settingsDialog.findViewById(R.id.btnOK);
+                ImageView imgDialogAvatar = settingsDialog.findViewById(R.id.imgDialogAvatar);
+                    imgDialogAvatar.setImageDrawable(imgAvatar.getDrawable());
+//                    imgDialogAvatar.setImageURI(Uri.parse(jsonReturn.getString("avatar")));
+                btnOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick( View v ) {
+                        settingsDialog.dismiss();
+                    }
+                });
+                settingsDialog.show();
             }
         });
     }
@@ -127,13 +145,11 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 }
             }
         }).start();
-//        final int DEFAULT_MAX_RETRIES = 1;
-//        final int DEFAULT_TIMEOUT = 5 * 1000;
         AsyncHttpClient client = new AsyncHttpClient();
-//        client.setTimeout(DEFAULT_TIMEOUT);
+//        client.setTimeout(5000);
 //        client.setConnectTimeout(5000);
 //        client.setResponseTimeout(5000);
-        client.get(DEFAULT_URL + "users/xxx", new JsonHttpResponseHandler() {
+        client.get(DEFAULT_URL + "users/" + usercode, new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 // called before request is started

@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -20,9 +23,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     // use a compound button so either checkbox or switch widgets work.
     private CompoundButton useFlash;
-    private TextView statusMessage;
-    private TextView barcodeValue;
-
+    Button btnCheck;
+    EditText txtUserCode;
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
 
@@ -37,6 +39,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
         findViewById(R.id.btnReadBarcode).setOnClickListener(this);
+        txtUserCode = findViewById(R.id.txtUserCode);
+        btnCheck = findViewById(R.id.btnCheck);
+
+        txtUserCode.setFilters(new InputFilter[] {
+                new RegexInputFilter("^[a-zA-Z0-9_]+"),
+                new InputFilter.LengthFilter(20)
+        });
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                Intent intent = new Intent(MainActivity.this, ViewInfoGuestActivity.class);
+                intent.putExtra("usercode", txtUserCode.getText().toString());
+                MainActivity.super.startActivity(intent);
+            }
+        });
     }
 
     /**

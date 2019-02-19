@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class Utility {
-    public static String DEFAULT_URL = "http://192.168.1.30:5050/";
+    public static String DEFAULT_URL = "http://10.20.8.226:5050/";
     public static JSONObject objectToJSONObject( Object object ) {
         Object json = null;
         JSONObject jsonObject = null;
