@@ -25,13 +25,14 @@
             android:id="@+id/imgAvatar"
             android:layout_width="140dp"
             android:layout_height="140dp"
+            android:clickable="true"
             android:scaleType="centerCrop"
             app:civ_border_width="5dp"
             app:civ_border_color="@color/white"
             android:elevation="4dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:src="@mipmap/xxx"/>
+            android:src="@drawable/ic_account_circle_black_24dp"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -64,6 +65,7 @@
                     android:layout_height="match_parent"
                     android:background="#f1f0f0" />
                 <TextView
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -71,7 +73,35 @@
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
                     android:background="@color/white"
-                    android:text="Tên đại biểu"/>
+                    android:text="Nguyễn Tăng Cường"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Giới tính"/>
+                <TextView
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#f1f0f0" />
+                <TextView
+                    android:id="@+id/txtGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dimen_10"
+                    android:fontFamily="@font/noticiatext_regular"
+                    android:textSize="20dp"
+                    android:background="@color/white"
+                    android:text="Nam"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,6 +121,7 @@
                     android:layout_height="match_parent"
                     android:background="#f1f0f0" />
                 <TextView
+                    android:id="@+id/txtDoB"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -98,7 +129,7 @@
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
                     android:background="@color/white"
-                    android:text="20 - 07 - 1998"/>
+                    android:text="xx - xx - xxxx"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,6 +149,7 @@
                     android:layout_height="match_parent"
                     android:background="#f1f0f0" />
                 <TextView
+                    android:id="@+id/txtAddress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -125,7 +157,7 @@
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
                     android:background="@color/white"
-                    android:text="354/12 Đường số 3, tỉnh lộ 43 Khu phố 5, Phường Tam Bình, Quận Thủ Đức, Thành Phố Hồ Chí Minh"/>
+                    android:text="xxx/xx Đường số xx, Đường số xx Khu phố x, Phường Tam Bình, Quận Thủ Đức, Thành Phố Hồ Chí Minh"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,6 +177,7 @@
                     android:layout_height="match_parent"
                     android:background="#f1f0f0" />
                 <TextView
+                    android:id="@+id/txtHomeTown"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -152,7 +185,7 @@
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
                     android:background="@color/white"
-                    android:text="Thành Phố Hồ Chí Minh"/>
+                    android:text="Thành Phố X"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,6 +205,7 @@
                     android:layout_height="match_parent"
                     android:background="#f1f0f0" />
                 <TextView
+                    android:id="@+id/txtDepartment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -179,7 +213,7 @@
                     android:fontFamily="@font/noticiatext_regular"
                     android:textSize="20dp"
                     android:background="@color/white"
-                    android:text="Chi Đoàn Công An"/>
+                    android:text="Chi Đoàn xxx"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -200,6 +234,7 @@
                 android:background="#f1f0f0"
                 />
                 <TextView
+                    android:id="@+id/txtSeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
