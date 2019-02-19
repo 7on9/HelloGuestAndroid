@@ -1,5 +1,6 @@
 package com.vnbamboo.helloguest;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Build;
@@ -16,11 +17,15 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeoutException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.conn.ConnectTimeoutException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.vnbamboo.helloguest.Utility.DEFAULT_URL;
@@ -33,6 +38,8 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
     CircleImageView imgAvatar;
     String usercode;
     JSONObject jsonReturn;
+    long beginTime, progress;
+
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
@@ -79,28 +86,54 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 txtSeat.setText(usercode.substring(usercode.length()-2));
                 txtGender.setText(jsonObject.getString("sex").equals("false") ? "Nam" : "Nữ");
                 txtDepartment.setText(jsonObject.getString("department"));
+                Picasso.get().load(jsonObject.getString("avatar")).into(imgAvatar);
             }catch (Exception e){
                 e.printStackTrace();
+
             }
         }else{
-            txtName.setText("...");
-            txtDoB.setText("...");
-            txtHomeTown.setText("...");
-            txtAddress.setText("...");
-            txtSeat.setText("...");
-            txtGender.setText("...");
-            txtDepartment.setText("...");
+            setTextContent("Đang tải dữ liệu...");
         }
-
+    }
+    private void setTextContent(String content){
+        txtName.setText(content);
+        txtDoB.setText(content);
+        txtHomeTown.setText(content);
+        txtAddress.setText(content);
+        txtSeat.setText(content);
+        txtGender.setText(content);
+        txtDepartment.setText(content);
     }
     private void sendRequestInfo() {
-        final long beginTime = System.currentTimeMillis();
+        beginTime = System.currentTimeMillis();
         receivedDataFromServer = false;
         progressDialog = ProgressDialog.show(ViewInfoGuestActivity.this, "",
                 "Đang tải dữ liệu khách mời. Xin đợi 1 chút...", true);
+        progress = 0;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progress <= 100) {
+                        Thread.sleep(50);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progress == 100 && !receivedDataFromServer) {
+                            setTextContent("Không thể tải dữ liệu...");
+                            progressDialog.dismiss();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+//        final int DEFAULT_MAX_RETRIES = 1;
+//        final int DEFAULT_TIMEOUT = 5 * 1000;
         AsyncHttpClient client = new AsyncHttpClient();
-
-        client.get(DEFAULT_URL +"users/xxx", new JsonHttpResponseHandler() {
+//        client.setTimeout(DEFAULT_TIMEOUT);
+//        client.setConnectTimeout(5000);
+//        client.setResponseTimeout(5000);
+        client.get(DEFAULT_URL + "users/xxx", new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 // called before request is started
@@ -110,44 +143,29 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess( int statusCode, Header[] headers, JSONObject response ) {
                 jsonReturn = response;
                 boundData(jsonReturn);
                 receivedDataFromServer = true;
                 Log.e("callAPI", jsonReturn.toString());
                 progressDialog.dismiss();
             }
+
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+            public void onFailure( int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse ) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                progressDialog.setMessage("Không thể tải dữ liệu!");
-                try {
-                    wait(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    progressDialog.dismiss();
-                }
+                setTextContent("Không thể tải dữ liệu...");
                 progressDialog.dismiss();
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (System.currentTimeMillis() - beginTime >= Math.abs(5000) || receivedDataFromServer)
-                        progressDialog.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-        Handler handle = new Handler() {
-            @Override
-            public void handleMessage( Message msg ) {
-                super.handleMessage(msg);
-
-            }
-        };
     }
-
+    Handler handle = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.e("seeeeee", String.valueOf(progress));
+            progress++;
+        }
+    };
 }
+
