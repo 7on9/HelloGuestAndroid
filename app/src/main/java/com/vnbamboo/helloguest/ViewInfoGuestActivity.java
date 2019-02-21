@@ -3,12 +3,14 @@ package com.vnbamboo.helloguest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -38,7 +41,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
     String usercode;
     JSONObject jsonReturn;
     long beginTime, progress;
-    Context thisContext = this.getBaseContext();
+    Context thisContext = this;
 
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
@@ -55,7 +58,8 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         sendRequestInfo();
 
     }
-    private void setControl(){
+
+    private void setControl() {
         imgAvatar = findViewById(R.id.imgAvatar);
         btnConfirm = findViewById(R.id.btnConfirm);
         btnCancel = findViewById(R.id.btnCancel);
@@ -67,11 +71,18 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         txtGender = findViewById(R.id.txtGender);
         txtDepartment = findViewById(R.id.txtDepartment);
     }
-    private void addEvent(){
+
+    private void addEvent() {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
                 onBackPressed();
+            }
+        });
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                confirmAttendant();
             }
         });
         imgAvatar.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +92,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 settingsDialog.setContentView(getLayoutInflater().inflate(R.layout.image_dialog, null));
                 Button btnOK = settingsDialog.findViewById(R.id.btnOK);
                 ImageView imgDialogAvatar = settingsDialog.findViewById(R.id.imgDialogAvatar);
-                    imgDialogAvatar.setImageDrawable(imgAvatar.getDrawable());
-//                    imgDialogAvatar.setImageURI(Uri.parse(jsonReturn.getString("avatar")));
+                imgDialogAvatar.setImageDrawable(imgAvatar.getDrawable());
                 btnOK.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick( View v ) {
@@ -94,26 +104,56 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         });
     }
 
-    private void boundData( JSONObject jsonObject){
-        if(jsonObject.length() > 0){
+    private void boundData( JSONObject jsonObject ) {
+        if (jsonObject.length() > 0) {
             try {
                 txtName.setText(jsonObject.getString("name"));
                 txtDoB.setText(jsonObject.getString("dob"));
                 txtHomeTown.setText(jsonObject.getString("hometown"));
                 txtAddress.setText(jsonObject.getString("address"));
-                txtSeat.setText(usercode.substring(usercode.length()-2));
+                txtSeat.setText(usercode.substring(usercode.length() - 2));
                 txtGender.setText(jsonObject.getString("sex").equals("false") ? "Nam" : "Nữ");
                 txtDepartment.setText(jsonObject.getString("department"));
                 Picasso.get().load(jsonObject.getString("avatar")).into(imgAvatar);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-
             }
-        }else{
+        } else {
             setTextContent("Đang tải dữ liệu...");
         }
     }
-    private void setTextContent(String content){
+
+    private void confirmAttendant() {
+        if (jsonReturn.length() > 0) {
+            /* Tạo hộp thoại xác nhận*/
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Thông báo");
+            try {
+                builder.setMessage("Xác nhận đại biểu " + jsonReturn.getString("name") + " đã có mặt tại đại hội?");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            builder.setCancelable(false);
+            builder.setPositiveButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick( DialogInterface dialogInterface, int i ) {
+                    dialogInterface.dismiss();
+//                    Toast.makeText(ViewInfoGuestActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Xác nhận", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick( DialogInterface dialogInterface, int i ) {
+                    dialogInterface.dismiss();
+                    sendConfirmRequest();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+    }
+
+    private void setTextContent( String content ) {
         txtName.setText(content);
         txtDoB.setText(content);
         txtHomeTown.setText(content);
@@ -122,6 +162,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         txtGender.setText(content);
         txtDepartment.setText(content);
     }
+
     private void sendRequestInfo() {
         beginTime = System.currentTimeMillis();
         receivedDataFromServer = false;
@@ -146,9 +187,6 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             }
         }).start();
         AsyncHttpClient client = new AsyncHttpClient();
-//        client.setTimeout(5000);
-//        client.setConnectTimeout(5000);
-//        client.setResponseTimeout(5000);
         client.get(DEFAULT_URL + "users/" + usercode, new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
@@ -175,9 +213,73 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void sendConfirmRequest() {
+        beginTime = System.currentTimeMillis();
+        receivedDataFromServer = false;
+        progressDialog = ProgressDialog.show(ViewInfoGuestActivity.this, "",
+                "Đang điểm danh đại biểu...", true);
+        progress = 0;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progress <= 100) {
+                        Thread.sleep(50);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progress == 100 && !receivedDataFromServer) {
+                            setTextContent("Có sự cố, xin hãy thử lại.");
+                            progressDialog.dismiss();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(DEFAULT_URL + "users/" + usercode, new JsonHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                Log.e("callAPI", "begin");
+            }
+
+            @Override
+            public void onSuccess( int statusCode, Header[] headers, JSONObject response ) {
+                progressDialog.dismiss();
+                receivedDataFromServer = true;
+                AlertDialog.Builder builder = new AlertDialog.Builder(thisContext);
+                try {
+                    builder.setMessage(response.getString("status").equals("true") ?
+                            "Chào mừng đại biểu " + jsonReturn.getString("name") + " đã có mặt tại đại hội!" :
+                            "Có lỗi xảy ra! Hãy thử lại.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                builder.setCancelable(false);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick( DialogInterface dialogInterface, int i ) {
+                        dialogInterface.dismiss();
+//                        Toast.makeText(ViewInfoGuestActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+
+            @Override
+            public void onFailure( int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse ) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                setTextContent("Có sự cố, xin hãy thử lại.");
+                progressDialog.dismiss();
+            }
+        });
+    }
+
     Handler handle = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage( Message msg ) {
             super.handleMessage(msg);
             Log.e("seeeeee", String.valueOf(progress));
             progress++;
