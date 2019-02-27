@@ -83,6 +83,6 @@
         android:layout_gravity="center"
         android:paddingTop="16dp"
         android:gravity="center"
-        android:text="Bamboo®"
+        android:text="Bamboo©"
         android:textColor="@color/white"/>
 </LinearLayout>

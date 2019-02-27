@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +13,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -173,9 +170,9 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    while (progress <= 100) {
+                    while (progress <= 500) {
                         Thread.sleep(50);
-                        handle.sendMessage(handle.obtainMessage());
+                        handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
                         if (progress == 100 && !receivedDataFromServer) {
                             setTextContent("Không thể tải dữ liệu...");
                             progressDialog.dismiss();
@@ -224,9 +221,9 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    while (progress <= 100) {
+                    while (progress <= 500) {
                         Thread.sleep(50);
-                        handle.sendMessage(handle.obtainMessage());
+                        handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
                         if (progress == 100 && !receivedDataFromServer) {
                             setTextContent("Có sự cố, xin hãy thử lại.");
                             progressDialog.dismiss();
@@ -277,7 +274,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         });
     }
 
-    Handler handle = new Handler() {
+    Handler handlerIncreaseProgress = new Handler() {
         @Override
         public void handleMessage( Message msg ) {
             super.handleMessage(msg);
