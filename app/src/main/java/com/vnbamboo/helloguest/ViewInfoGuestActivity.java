@@ -69,6 +69,16 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         txtDepartment = findViewById(R.id.txtDepartment);
     }
 
+    private void setTextContent( String content ) {
+        txtName.setText(content);
+        txtDoB.setText(content);
+        txtHomeTown.setText(content);
+        txtAddress.setText(content);
+        txtSeat.setText(content);
+        txtGender.setText(content);
+        txtDepartment.setText(content);
+    }
+
     private void addEvent() {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +118,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 txtDoB.setText(jsonObject.getString("dob"));
                 txtHomeTown.setText(jsonObject.getString("hometown"));
                 txtAddress.setText(jsonObject.getString("address"));
-                txtSeat.setText(usercode.substring(usercode.length() - 2));
+                txtSeat.setText(usercode.substring(2, 4));
                 txtGender.setText(jsonObject.getString("sex").equals("false") ? "Nam" : "Nữ");
                 txtDepartment.setText(jsonObject.getString("department"));
                 Picasso.get().load(jsonObject.getString("avatar")).into(imgAvatar);
@@ -150,16 +160,6 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
         }
     }
 
-    private void setTextContent( String content ) {
-        txtName.setText(content);
-        txtDoB.setText(content);
-        txtHomeTown.setText(content);
-        txtAddress.setText(content);
-        txtSeat.setText(content);
-        txtGender.setText(content);
-        txtDepartment.setText(content);
-    }
-
     private void sendRequestInfo() {
         beginTime = System.currentTimeMillis();
         receivedDataFromServer = false;
@@ -170,7 +170,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    while (progress <= 500) {
+                    while (progress <= 250) {
                         Thread.sleep(50);
                         handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
                         if (progress == 100 && !receivedDataFromServer) {
@@ -184,7 +184,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             }
         }).start();
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(DEFAULT_URL + "users/" + usercode, new JsonHttpResponseHandler() {
+        client.get(DEFAULT_URL + "users/" + usercode.toUpperCase(), new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 // called before request is started
@@ -197,6 +197,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             public void onSuccess( int statusCode, Header[] headers, JSONObject response ) {
                 jsonReturn = response;
                 boundData(jsonReturn);
+                Log.e("GET DATA", jsonReturn.toString());
                 receivedDataFromServer = true;
                 Log.e("callAPI", jsonReturn.toString());
                 progressDialog.dismiss();
@@ -221,7 +222,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    while (progress <= 500) {
+                    while (progress <= 250) {
                         Thread.sleep(50);
                         handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
                         if (progress == 100 && !receivedDataFromServer) {
@@ -235,7 +236,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             }
         }).start();
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post(DEFAULT_URL + "users/" + usercode, new JsonHttpResponseHandler() {
+        client.post(DEFAULT_URL + "users/" + usercode.toUpperCase(), new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 Log.e("callAPI", "begin");
