@@ -173,12 +173,16 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                     while (progress <= 250) {
                         Thread.sleep(50);
                         handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
-                        if (progress == 100 && !receivedDataFromServer) {
+                        if(receivedDataFromServer)
+                            break;
+                        if (progress == 250 && !receivedDataFromServer) {
                             setTextContent("Không thể tải dữ liệu...");
                             progressDialog.dismiss();
                         }
                     }
+                    progressDialog.dismiss();
                 } catch (Exception e) {
+                    progressDialog.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -199,6 +203,7 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                 boundData(jsonReturn);
                 Log.e("GET DATA", jsonReturn.toString());
                 receivedDataFromServer = true;
+                progress = 250;
                 Log.e("callAPI", jsonReturn.toString());
                 progressDialog.dismiss();
             }
@@ -207,6 +212,8 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
             public void onFailure( int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse ) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 setTextContent("Không thể tải dữ liệu...");
+                receivedDataFromServer = false;
+                progress = 250;
                 progressDialog.dismiss();
             }
         });
@@ -225,7 +232,9 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
                     while (progress <= 250) {
                         Thread.sleep(50);
                         handlerIncreaseProgress.sendMessage(handlerIncreaseProgress.obtainMessage());
-                        if (progress == 100 && !receivedDataFromServer) {
+                        if(receivedDataFromServer)
+                            break;
+                        if (progress == 250 && !receivedDataFromServer) {
                             setTextContent("Có sự cố, xin hãy thử lại.");
                             progressDialog.dismiss();
                         }
@@ -244,8 +253,9 @@ public class ViewInfoGuestActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess( int statusCode, Header[] headers, JSONObject response ) {
-                progressDialog.dismiss();
                 receivedDataFromServer = true;
+                progress = 250;
+                progressDialog.dismiss();
                 AlertDialog.Builder builder = new AlertDialog.Builder(thisContext);
                 try {
                     builder.setMessage(response.getString("status").equals("true") ?
